@@ -1,0 +1,491 @@
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, CheckCircle, FileText, AlertTriangle, Download, User } from 'lucide-react';
+import { projectId, publicAnonKey } from '../../utils/supabase/info';
+import { generateSubmissionPDF, convertImageToDataURL } from '../../utils/pdfGenerator';
+const terralabsLogo = "/images/TERRA_OPS_LOGO__2_-1.png";
+import '../../../styles/legal.css';
+
+interface OnboardingFormProps {
+  onBack: () => void;
+  selectedPlan?: {
+    name: string;
+    price: string;
+    capital: string;
+    engine: string;
+    tier?: string;
+    monthlyFee?: number;
+  };
+}
+
+export function OnboardingForm({ onBack, selectedPlan }: OnboardingFormProps) {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [requestId, setRequestId] = useState('');
+  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!fullName || !email) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Send to backend
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-8c0fc0e7/submit-onboarding-request`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fullName,
+            email,
+            phone,
+            country,
+            tier: selectedPlan?.tier || 'Not specified',
+            engine: selectedPlan?.engine || 'Aurelius-1™',
+            capital: selectedPlan?.capital || 'Not specified',
+            monthlyFee: selectedPlan?.monthlyFee || 0,
+            timestamp: new Date().toISOString()
+          })
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to submit onboarding request');
+      }
+
+      const result = await response.json();
+      const generatedRequestId = result.requestId || `ONB-${Date.now()}`;
+      setRequestId(generatedRequestId);
+
+      // Generate PDF
+      try {
+        const logoDataUrl = await convertImageToDataURL(terralabsLogo);
+        const pdfData = {
+          requestId: generatedRequestId,
+          fullName,
+          email,
+          phone,
+          country,
+          tier: selectedPlan?.tier || 'Not specified',
+          engine: selectedPlan?.engine || 'Aurelius-1™',
+          capital: selectedPlan?.capital || 'Not specified',
+          monthlyFee: selectedPlan?.monthlyFee || 0
+        };
+
+        const blob = await generateSubmissionPDF({
+          type: 'onboarding',
+          data: pdfData,
+          logoDataUrl
+        });
+
+        setPdfBlob(blob);
+      } catch (pdfError) {
+        console.error('PDF generation error:', pdfError);
+        // Continue even if PDF fails
+      }
+
+      setSubmitted(true);
+
+      // Auto-redirect to WhatsApp after 2 seconds
+      setTimeout(() => {
+        const whatsappMessage = encodeURIComponent(
+          `📋 CLIENT ONBOARDING SUBMISSION\n\n` +
+          `Request ID: ${generatedRequestId}\n` +
+          `Name: ${fullName}\n` +
+          `Email: ${email}\n` +
+          `Tier: ${selectedPlan?.tier || 'Standard'}\n` +
+          `Capital: ${selectedPlan?.capital || 'To be discussed'}\n\n` +
+          `I've submitted my onboarding request and I'm ready to begin my subscription!`
+        );
+        window.open(`https://wa.me/971543434848?text=${whatsappMessage}`, '_blank');
+      }, 2000);
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('An error occurred while submitting your request. Please try again or contact us directly via WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const downloadPDF = () => {
+    if (pdfBlob) {
+      const url = URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `TERRALABS-Onboarding-${requestId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  // Success screen
+  if (submitted) {
+    return (
+      <div className="legal-document-page">
+        <div className="success-container">
+          <CheckCircle size={80} style={{ color: '#10B981', marginBottom: '24px' }} />
+          <h1 style={{ fontSize: '32px', marginBottom: '16px' }}>Welcome to TERRALABS!</h1>
+          <p style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.7)', marginBottom: '32px', maxWidth: '600px' }}>
+            Thank you, {fullName}! Your onboarding request has been received. Our team will contact you within 24 hours at {email} to begin your subscription.
+          </p>
+          
+          {pdfBlob && (
+            <div style={{
+              background: 'rgba(156, 255, 46, 0.1)',
+              border: '2px solid rgba(156, 255, 46, 0.3)',
+              borderRadius: '12px',
+              padding: '20px',
+              marginBottom: '24px',
+              maxWidth: '600px'
+            }}>
+              <h3 style={{ marginBottom: '12px', color: '#9CFF2E', fontSize: '18px' }}>
+                📄 Your Onboarding Document
+              </h3>
+              <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', marginBottom: '16px' }}>
+                Professional PDF generated with Request ID: <strong>{requestId}</strong>
+              </p>
+              <button
+                onClick={downloadPDF}
+                style={{
+                  padding: '12px 24px',
+                  background: 'linear-gradient(135deg, rgba(156, 255, 46, 0.25) 0%, rgba(156, 255, 46, 0.15) 100%)',
+                  border: '1px solid rgba(156, 255, 46, 0.5)',
+                  borderRadius: '8px',
+                  color: '#9CFF2E',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  margin: '0 auto'
+                }}
+              >
+                <Download size={18} />
+                Download PDF
+              </button>
+            </div>
+          )}
+          
+          <div style={{
+            background: 'rgba(255, 92, 57, 0.1)',
+            border: '2px solid rgba(255, 92, 57, 0.3)',
+            borderRadius: '12px',
+            padding: '24px',
+            marginBottom: '32px',
+            maxWidth: '600px'
+          }}>
+            <h3 style={{ marginBottom: '16px', color: '#FF5C39' }}>Your Subscription Includes:</h3>
+            <ul style={{ textAlign: 'left', fontSize: '16px', lineHeight: '1.8', paddingLeft: '20px' }}>
+              <li>Full access to {selectedPlan?.engine || 'Aurelius-1™'}</li>
+              <li>MT5 broker integration setup</li>
+              <li>24/7 algorithmic trading monitoring</li>
+              <li>Platform training and onboarding call</li>
+              <li>Keep 100% of your trading profits</li>
+
+            </ul>
+          </div>
+
+          <div style={{
+            background: 'rgba(37, 211, 102, 0.1)',
+            border: '2px solid rgba(37, 211, 102, 0.3)',
+            borderRadius: '12px',
+            padding: '20px',
+            marginBottom: '32px',
+            maxWidth: '600px'
+          }}>
+            <p style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.9)', margin: 0 }}>
+              🚀 <strong>Redirecting to WhatsApp...</strong><br/>
+              <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)' }}>
+                You'll be connected with our onboarding team in a moment
+              </span>
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => window.location.href = '/'}
+              style={{
+                padding: '16px 32px',
+                background: 'linear-gradient(135deg, #FF5C39 0%, #FF3D1A 100%)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              Return Home
+            </button>
+            <a
+              href={`https://wa.me/971543434848?text=${encodeURIComponent(
+                `📋 ONBOARDING REQUEST\n\nRequest ID: ${requestId}\nName: ${fullName}\nTier: ${selectedPlan?.tier || 'Standard'}\n\nI'm ready to start my subscription!`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                padding: '16px 32px',
+                background: 'transparent',
+                border: '2px solid #25D366',
+                color: '#25D366',
+                borderRadius: '8px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                display: 'inline-block'
+              }}
+            >
+              Open WhatsApp Manually
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="legal-document-page">
+      <div className="legal-header">
+        <button onClick={onBack} className="back-button">
+          <ArrowLeft size={20} />
+          Back
+        </button>
+        <div className="legal-header-content">
+          <User size={48} style={{ color: '#FF5C39', display: 'block', margin: '0 auto' }} />
+          <h1>Client Onboarding</h1>
+          <p className="legal-subtitle">TERRALABS INDUSTRIES INFORMATION TECHNOLOGY CONSULTANCIES – FZCO</p>
+          <p className="legal-date">Begin Your Subscription</p>
+        </div>
+      </div>
+
+      <div className="legal-content">
+        {/* Selected Plan Banner */}
+        {selectedPlan && selectedPlan.tier && (
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(255, 92, 57, 0.15) 0%, rgba(255, 92, 57, 0.1) 100%)',
+            border: '2px solid rgba(255, 92, 57, 0.3)',
+            borderRadius: '12px',
+            padding: '20px',
+            marginBottom: '32px',
+            textAlign: 'center'
+          }}>
+            <h3 style={{ fontSize: '20px', marginBottom: '8px', color: '#FF5C39', fontWeight: 'bold' }}>
+              ✓ Selected Plan: {selectedPlan.tier} Tier
+            </h3>
+            <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.85)', lineHeight: '1.6', margin: '0' }}>
+              Trading Capital: {selectedPlan.capital} | Engine: {selectedPlan.engine}
+            </p>
+            <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', marginTop: '8px' }}>
+              Monthly Fee: <strong style={{ color: '#9CFF2E' }}>${selectedPlan.monthlyFee}/month</strong>
+            </p>
+          </div>
+        )}
+
+        <section className="legal-section">
+          <h2>Your Subscription</h2>
+          <p>
+            Start your algorithmic trading journey with flexible monthly pricing. Experience the full power of TERRALABS trading engines.
+          </p>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '1rem', 
+            marginTop: '1.5rem',
+            padding: '1.5rem',
+            background: 'rgba(156, 255, 46, 0.05)',
+            border: '1px solid rgba(156, 255, 46, 0.2)',
+            borderRadius: '12px'
+          }}>
+            <div>
+              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💳</div>
+              <strong style={{ color: '#9CFF2E' }}>Monthly Billing</strong>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.7)', marginTop: '0.5rem' }}>
+                Fixed transparent pricing
+              </p>
+            </div>
+            <div>
+              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🤖</div>
+              <strong style={{ color: '#9CFF2E' }}>Full Access</strong>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.7)', marginTop: '0.5rem' }}>
+                Complete engine features
+              </p>
+            </div>
+            <div>
+              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💰</div>
+              <strong style={{ color: '#9CFF2E' }}>Keep 100% Profits</strong>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.7)', marginTop: '0.5rem' }}>
+                All profits are yours
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="legal-section" style={{ background: 'rgba(255, 92, 57, 0.05)', border: '2px solid rgba(255, 92, 57, 0.2)', borderRadius: '12px', padding: '32px' }}>
+          <h2 style={{ marginTop: 0, color: '#FF5C39' }}>Complete Your Onboarding</h2>
+          <p style={{ marginBottom: '24px', color: 'rgba(255, 255, 255, 0.8)' }}>
+            Fill in your details below and our team will contact you within 24 hours to activate your subscription.
+          </p>
+          
+          <form onSubmit={handleSubmit}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#FF5C39' }}>
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                  placeholder="John Doe"
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 92, 57, 0.3)',
+                    borderRadius: '8px',
+                    color: '#fff',
+                    fontSize: '16px'
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#FF5C39' }}>
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="john@email.com"
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 92, 57, 0.3)',
+                    borderRadius: '8px',
+                    color: '#fff',
+                    fontSize: '16px'
+                  }}
+                />
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '24px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#FF5C39' }}>
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+971 50 123 4567"
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 92, 57, 0.3)',
+                    borderRadius: '8px',
+                    color: '#fff',
+                    fontSize: '16px'
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#FF5C39' }}>
+                  Country / Jurisdiction
+                </label>
+                <input
+                  type="text"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  placeholder="United Arab Emirates"
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 92, 57, 0.3)',
+                    borderRadius: '8px',
+                    color: '#fff',
+                    fontSize: '16px'
+                  }}
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{
+                width: '100%',
+                padding: '16px 32px',
+                background: isSubmitting ? 'rgba(255, 92, 57, 0.3)' : 'linear-gradient(135deg, #FF5C39 0%, #FF3D1A 100%)',
+                color: '#fff',
+                fontSize: '18px',
+                fontWeight: '700',
+                border: 'none',
+                borderRadius: '12px',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 8px 24px rgba(255, 92, 57, 0.3)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(255, 92, 57, 0.4)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(255, 92, 57, 0.3)';
+                }
+              }}
+            >
+              {isSubmitting ? 'Submitting...' : 'Begin Onboarding'}
+            </button>
+          </form>
+        </section>
+
+        {/* Disclaimer */}
+        <div style={{
+          marginTop: '32px',
+          padding: '16px',
+          background: 'rgba(255, 92, 57, 0.05)',
+          border: '1px solid rgba(255, 92, 57, 0.2)',
+          borderRadius: '8px',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '12px'
+        }}>
+          <AlertTriangle size={20} style={{ color: '#FF5C39', flexShrink: 0, marginTop: '2px' }} />
+          <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.7)', margin: 0, lineHeight: '1.6' }}>
+            <strong>TERRALABS provides software tools only.</strong> No financial advice. No guarantees. Trading involves substantial risk of loss. All subscriptions are billed monthly with flexible cancellation.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

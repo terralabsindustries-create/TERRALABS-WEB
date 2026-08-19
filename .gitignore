@@ -1,0 +1,52 @@
+# ---- dependencies ----
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/versions
+
+# ---- Next.js build output ----
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# ---- production / misc build ----
+/dist
+*.tsbuildinfo
+.turbo
+
+# ---- environment: never commit real credentials ----
+# The app talks to Supabase and Resend; their keys belong in the host's
+# environment settings (Vercel > Project > Environment Variables), not in git.
+.env
+.env.*
+!.env.example
+
+# ---- deployment ----
+.vercel
+
+# ---- testing / coverage ----
+/coverage
+
+# ---- logs ----
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ---- editor / OS cruft ----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ---- original Figma Make export archives (superseded by src/) ----
+*.zip

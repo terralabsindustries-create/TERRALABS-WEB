@@ -1,0 +1,700 @@
+/* Legal Document Pages Styling */
+.legal-document-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0A0B14 0%, #13141F 100%);
+  color: #ffffff;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 2rem;
+}
+
+/* Header */
+.legal-header {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  position: relative;
+}
+
+.back-button {
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 92, 57, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 92, 57, 0.3);
+  border-radius: 12px;
+  color: #FF5C39;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.back-button:hover {
+  background: rgba(255, 92, 57, 0.25);
+  transform: translateX(-4px);
+  box-shadow: 0 6px 30px rgba(255, 92, 57, 0.4);
+}
+
+.legal-header-content {
+  padding-top: 4rem;
+}
+
+.legal-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  background: linear-gradient(135deg, #FF5C39, #FF3D1A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.legal-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.5rem 0;
+}
+
+.legal-date {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0.25rem 0;
+}
+
+.legal-jurisdiction {
+  font-size: 0.875rem;
+  color: #FF5C39;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Content Area */
+.legal-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Sections */
+.legal-section {
+  margin-bottom: 3rem;
+}
+
+.legal-section h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #FF5C39;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 92, 57, 0.2);
+}
+
+.legal-section h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.legal-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.75rem 0;
+}
+
+.legal-section ul,
+.legal-section ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+  line-height: 1.8;
+}
+
+.legal-section li {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.5rem 0;
+}
+
+.legal-section strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Notice Boxes */
+.legal-notice {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin: 2rem 0;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.legal-notice.critical {
+  background: rgba(255, 68, 68, 0.15);
+  border: 2px solid rgba(255, 68, 68, 0.4);
+}
+
+.legal-notice.warning {
+  background: rgba(255, 156, 67, 0.15);
+  border: 2px solid rgba(255, 156, 67, 0.4);
+}
+
+.legal-notice.info {
+  background: rgba(10, 132, 255, 0.15);
+  border: 2px solid rgba(10, 132, 255, 0.4);
+}
+
+.legal-notice svg {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.legal-notice strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.legal-notice p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+/* Contact Box */
+.contact-box {
+  background: rgba(255, 92, 57, 0.1);
+  border: 1px solid rgba(255, 92, 57, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.contact-box p {
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-box strong {
+  color: #FF5C39;
+}
+
+/* Footer Signature */
+.legal-footer-signature {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+.legal-footer-signature p {
+  margin: 0.25rem 0;
+}
+
+/* Onboarding Specific Styles */
+.onboarding-success {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.success-icon {
+  margin-bottom: 24px;
+  animation: successPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.onboarding-success h1 {
+  color: #10B981;
+  margin-bottom: 16px;
+  font-size: 2rem;
+}
+
+.onboarding-success > p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.agreement-summary {
+  margin: 32px 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 92, 57, 0.2);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.agreement-summary h3 {
+  color: #FF5C39;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95em;
+}
+
+.summary-row strong {
+  color: #fff;
+  font-size: 1em;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.action-buttons .cta-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+}
+
+.cta-button.primary {
+  background: linear-gradient(135deg, #FF5C39, #FF3D1A);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(255, 92, 57, 0.4);
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 92, 57, 0.6);
+}
+
+.cta-button.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cta-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Plan Summary */
+.plan-summary {
+  background: linear-gradient(135deg, rgba(255, 92, 57, 0.1), rgba(10, 132, 255, 0.05));
+  border: 2px solid rgba(255, 92, 57, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.plan-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.plan-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plan-detail-row:last-child {
+  border-bottom: none;
+}
+
+.plan-detail-row span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.plan-detail-row strong {
+  color: #ffffff;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.legal-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.legal-checkbox:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 92, 57, 0.3);
+}
+
+.legal-checkbox input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #FF5C39;
+  flex-shrink: 0;
+}
+
+.legal-checkbox span {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.legal-checkbox strong {
+  color: #FF5C39;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Signature Section */
+.signature-section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 92, 57, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+  outline: none;
+  border-color: #FF5C39;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Signature Canvas */
+.signature-canvas-container {
+  margin: 2rem 0;
+}
+
+.signature-canvas-container label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #FF5C39;
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.signature-instruction {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
+}
+
+.signature-canvas {
+  width: 100%;
+  max-width: 600px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed rgba(255, 92, 57, 0.3);
+  border-radius: 12px;
+  cursor: crosshair;
+  display: block;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  touch-action: none; /* Prevent default touch behaviors */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.signature-canvas:hover {
+  border-color: rgba(255, 92, 57, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.signature-canvas:active {
+  border-color: #FF5C39;
+  background: rgba(255, 92, 57, 0.08);
+}
+
+.clear-signature-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #EF4444;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clear-signature-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+.clear-signature-btn:active {
+  transform: translateY(0);
+}
+
+/* Back to Top Button */
+.back-to-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 92, 57, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 92, 57, 0.3);
+  border-radius: 50%;
+  color: #FF5C39;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(255, 92, 57, 0.15);
+}
+
+.back-to-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top-button:hover {
+  background: rgba(255, 92, 57, 0.25);
+  border-color: #FF5C39;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 92, 57, 0.25);
+}
+
+.back-to-top-button:active {
+  transform: translateY(-1px);
+}
+
+/* Agreement Submit */
+.agreement-submit-section {
+  text-align: center;
+  margin: 3rem 0 2rem;
+}
+
+.cta-button.large {
+  padding: 1.25rem 3rem;
+  font-size: 1.125rem;
+}
+
+.submit-disclaimer {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .legal-document-page {
+    padding: 1rem;
+  }
+  
+  .legal-header h1 {
+    font-size: 2rem;
+  }
+  
+  .legal-content {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .back-button {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    z-index: 1000;
+  }
+  
+  .legal-header-content {
+    padding-top: 0;
+  }
+  
+  .legal-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .legal-notice {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .signature-canvas {
+    height: 150px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .summary-row {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+  
+  .plan-detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+  
+  /* Mobile optimization for plan selection section */
+  .legal-section {
+    padding: 1rem !important;
+  }
+  
+  /* Make all flex containers wrap or stack on mobile */
+  .legal-section > div[style*="display: flex"] {
+    flex-wrap: wrap !important;
+  }
+  
+  /* Ensure buttons and inputs don't overflow */
+  .legal-section button,
+  .legal-section input {
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Stack billing period buttons vertically on mobile */
+  .legal-section button[style*="flex: 1"] {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+  
+  /* Reduce font sizes for better fit */
+  .legal-section button > div {
+    font-size: 0.9em !important;
+  }
+  
+  /* Capital input adjustments */
+  .legal-section input[type="text"] {
+    font-size: 1em !important;
+    padding: 12px 12px 12px 32px !important;
+  }
+  
+  /* Fund security notice on mobile */
+  .legal-section div[style*="padding: 20px"] {
+    padding: 1rem !important;
+  }
+}
