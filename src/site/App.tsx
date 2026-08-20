@@ -844,7 +844,7 @@ const HeroSection = React.memo(
                   letterSpacing: "0.2em",
                 }}
               >
-                Introducing
+                Introducings
               </span>
             </div>
           </div>
