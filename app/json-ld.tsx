@@ -11,8 +11,8 @@ const organization = {
   "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.name,
-  alternateName: site.shortName,
-  url: site.url,
+  alternateName: site.alternateName,
+  url: site.canonical,
   logo: {
     "@type": "ImageObject",
     url: `${site.url}/images/TERRA_OPS_LOGO__2_-1.png`,
@@ -43,7 +43,7 @@ const organization = {
 const website = {
   "@type": "WebSite",
   "@id": `${site.url}/#website`,
-  url: site.url,
+  url: site.canonical,
   name: site.name,
   description: site.description,
   publisher: { "@id": `${site.url}/#organization` },

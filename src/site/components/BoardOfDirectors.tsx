@@ -120,7 +120,7 @@ export function BoardOfDirectors() {
             boxShadow: '0 0 20px rgba(255, 92, 57, 0.5)'
           }} />
           
-          <h1 style={{ 
+          <h2 style={{ 
             fontSize: 'clamp(2.5rem, 10vw, 8rem)', 
             fontWeight: 900, 
             lineHeight: 1.1, 
@@ -143,7 +143,7 @@ export function BoardOfDirectors() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>.</span>
-          </h1>
+          </h2>
           
           <p style={{ 
             color: 'rgba(255, 255, 255, 0.7)', 

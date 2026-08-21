@@ -866,19 +866,34 @@ const HeroSection = React.memo(
               }}
             />
 
-            <img
-              src={stardustLogo}
-              alt="STARDUST™"
+            {/* The hero wordmark is this page every heading hangs off, so it is the
+                h1. The element carries a full style reset and no box of its own, so
+                the rendered layout is byte-identical to the bare <img> it replaced. */}
+            <h1
               style={{
-                width: "clamp(260px, 60vw, 690px)",
-                height: "auto",
-                display: "block",
-                margin: "0 auto 1.5rem auto",
-                mixBlendMode: "screen",
-                filter:
-                  "drop-shadow(0 0 24px rgba(255, 92, 57, 0.35))",
+                margin: 0,
+                padding: 0,
+                fontSize: "inherit",
+                fontWeight: "inherit",
+                lineHeight: "inherit",
+                letterSpacing: "inherit",
+                fontFamily: "inherit",
               }}
-            />
+            >
+              <img
+                src={stardustLogo}
+                alt="Pythagoras Stardust — AI gold trading engine by TerraLabs Industries"
+                style={{
+                  width: "clamp(260px, 60vw, 690px)",
+                  height: "auto",
+                  display: "block",
+                  margin: "0 auto 1.5rem auto",
+                  mixBlendMode: "screen",
+                  filter:
+                    "drop-shadow(0 0 24px rgba(255, 92, 57, 0.35))",
+                }}
+              />
+            </h1>
           </div>
 
           <div
