@@ -825,6 +825,13 @@ const HeroSection = React.memo(
             padding: "0 2rem",
           }}
         >
+          {/* The visible wordmark is an image, so the page carries its textual H1
+              here. .sr-only is the same utility the shadcn components already use:
+              it clips the element out of view while leaving it in the DOM and in the
+              accessibility tree. No display:none, visibility:hidden or opacity:0,
+              and the text matches the visible brand, so it is not cloaking. */}
+          <h1 className="sr-only">TerraLabs Industries</h1>
+
           <div className="hero-badge-container animate-fast">
             <div
               style={{
@@ -866,34 +873,19 @@ const HeroSection = React.memo(
               }}
             />
 
-            {/* The hero wordmark is this page every heading hangs off, so it is the
-                h1. The element carries a full style reset and no box of its own, so
-                the rendered layout is byte-identical to the bare <img> it replaced. */}
-            <h1
+            <img
+              src={stardustLogo}
+              alt="Pythagoras Stardust — AI gold trading engine by TerraLabs Industries"
               style={{
-                margin: 0,
-                padding: 0,
-                fontSize: "inherit",
-                fontWeight: "inherit",
-                lineHeight: "inherit",
-                letterSpacing: "inherit",
-                fontFamily: "inherit",
+                width: "clamp(260px, 60vw, 690px)",
+                height: "auto",
+                display: "block",
+                margin: "0 auto 1.5rem auto",
+                mixBlendMode: "screen",
+                filter:
+                  "drop-shadow(0 0 24px rgba(255, 92, 57, 0.35))",
               }}
-            >
-              <img
-                src={stardustLogo}
-                alt="Pythagoras Stardust — AI gold trading engine by TerraLabs Industries"
-                style={{
-                  width: "clamp(260px, 60vw, 690px)",
-                  height: "auto",
-                  display: "block",
-                  margin: "0 auto 1.5rem auto",
-                  mixBlendMode: "screen",
-                  filter:
-                    "drop-shadow(0 0 24px rgba(255, 92, 57, 0.35))",
-                }}
-              />
-            </h1>
+            />
           </div>
 
           <div
