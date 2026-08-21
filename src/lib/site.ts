@@ -8,13 +8,23 @@
  */
 
 export const site = {
-  name: "TERRALABS INDUSTRIES",
-  shortName: "TERRALABS",
-  url: "https://www.terralabsindustries.com",
+  name: "TerraLabs Industries",
+  // The site copy renders the wordmark in caps; keep it as an alternate name so
+  // both forms resolve to the same entity in search.
+  alternateName: "TERRALABS INDUSTRIES",
+  shortName: "TerraLabs",
 
-  title: "TERRALABS INDUSTRIES | AI-Driven XAU/USD Trading",
+  // Origin only — used for metadataBase. Never add a trailing slash here.
+  url: "https://www.terralabsindustries.com",
+  // Canonical form of the homepage. Next normalises the root path to the
+  // origin with no trailing slash; for the root URL the two forms are
+  // equivalent to Google, and forcing the slash via trailingSlash: true makes
+  // /opengraph-image 308-redirect, which strict social crawlers mishandle.
+  canonical: "https://www.terralabsindustries.com",
+
+  title: "TerraLabs Industries | AI & Technology Company",
   description:
-    "AI-driven XAU/USD trading powered by SNAIT adaptive intelligence. Institutional-grade gold algorithmic execution from Dubai. DIEZA licensed, No. 75343.",
+    "TerraLabs Industries builds AI-powered software and intelligent trading platforms, including Pythagoras Stardust — a machine-learning gold trading engine.",
 
   tagline: "Synthetic Neural Adaptive Intelligence Technology",
 

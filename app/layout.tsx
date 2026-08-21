@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   publisher: site.name,
 
   alternates: {
-    canonical: "/",
+    canonical: site.canonical,
   },
 
   openGraph: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.title,
     description: site.description,
-    url: site.url,
+    url: site.canonical,
     locale: site.locale,
     // Resolved from app/opengraph-image.tsx
   },
