@@ -62,7 +62,7 @@ const roadmapData: Division[] = [
       },
       {
         id: 'rnd-lab',
-        name: 'TERRALABS R&D Laboratory',
+        name: 'TerraLabs R&D Laboratory',
         status: 'research',
         description: 'Dedicated research facility focused on Deep Reinforcement Learning (DRL) and technological advancements in algorithmic trading, quantitative finance, and AI-driven market analysis. Powered by high-performance GPU clusters and supercomputing infrastructure, our R&D lab processes massive datasets, trains complex neural networks, and runs millions of market simulations to pioneer the next generation of quantitative intelligence systems.',
         icon: Brain,
@@ -132,7 +132,7 @@ const roadmapData: Division[] = [
     projects: [
       {
         id: 'weloop',
-        name: 'WELOOP™',
+        name: 'WeLoop™',
         status: 'research',
         description: 'AI-driven human coordination system that listens to real-world needs, understands intent, and connects people instantly to solve life\'s problems with trust, proximity, and democratic earning—every single second.',
         icon: Network,
@@ -323,7 +323,7 @@ export function RoadMap() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
-            }}>Terralabs</span>
+            }}>TerraLabs</span>
             <span style={{
               background: 'linear-gradient(to right, #FF5C39, #FF3D1A)',
               WebkitBackgroundClip: 'text',

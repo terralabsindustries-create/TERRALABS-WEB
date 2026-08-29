@@ -44,6 +44,7 @@ import {
 const terralabsLogo = "/images/TERRA_OPS_LOGO__2_-1.png";
 const aureliusLogo = "/images/figma-placeholder.svg";
 const stardustLogo = "/images/TERRA_OPS_LOGO__4_.png";
+import { attribution, site } from "../lib/site";
 import { NavigationBar } from "./components/NavigationBar";
 
 // Import components directly for better initial load performance
@@ -798,6 +799,336 @@ const Navigation = React.memo(
   },
 );
 
+// Accent rule reused by every heading in the company section.
+const AccentRule = () => (
+  <div
+    style={{
+      width: "clamp(50px, 10vw, 80px)",
+      height: "clamp(3px, 0.5vw, 4px)",
+      background: "linear-gradient(to right, #FF5C39, #FF3D1A)",
+      margin: "0 auto clamp(1rem, 3vw, 2rem) auto",
+      borderRadius: "2px",
+      boxShadow: "0 0 20px rgba(255, 92, 57, 0.5)",
+    }}
+  />
+);
+
+const gradientText = {
+  background: "linear-gradient(to right, #FF5C39, #FF3D1A)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+} as const;
+
+const bodyCopy = {
+  fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
+  lineHeight: 1.75,
+  color: "rgba(255, 255, 255, 0.72)",
+  margin: "0 0 1.25rem 0",
+} as const;
+
+// Company Section — the page's corporate positioning, and the only H1 on the
+// document. Every string is read from src/lib/site.ts, which app/json-ld.tsx
+// also reads, so the structured data cannot describe the company differently
+// from what a visitor actually sees here.
+const CompanySection = React.memo(() => {
+  return (
+    <section
+      id="company"
+      className="company-section"
+      style={{ padding: "9rem 0 5rem", position: "relative" }}
+    >
+      <div className="section-container">
+        {/* Positioning */}
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <AccentRule />
+
+          <h1
+            style={{
+              fontSize: "clamp(2.5rem, 7vw, 5rem)",
+              fontWeight: 900,
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              color: "#FFFFFF",
+              margin: "0 0 1rem 0",
+            }}
+          >
+            {site.name}
+          </h1>
+
+          <p
+            style={{
+              ...gradientText,
+              fontSize: "clamp(1.25rem, 3vw, 2rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.01em",
+              margin: "0 0 2.5rem 0",
+            }}
+          >
+            {site.tagline}
+          </p>
+
+          {site.intro.map((paragraph, index) => (
+            <p
+              key={paragraph.slice(0, 40)}
+              style={{
+                ...bodyCopy,
+                // The opening sentence is the page's summary — give it weight.
+                fontSize:
+                  index === 0
+                    ? "clamp(1.05rem, 2vw, 1.35rem)"
+                    : bodyCopy.fontSize,
+                color:
+                  index === 0
+                    ? "rgba(255, 255, 255, 0.88)"
+                    : bodyCopy.color,
+              }}
+            >
+              {paragraph}
+            </p>
+          ))}
+
+          <p
+            style={{
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "rgba(255, 255, 255, 0.45)",
+              margin: "2.5rem 0 1rem 0",
+            }}
+          >
+            Working at the convergence of
+          </p>
+
+          <ul
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "0.6rem",
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+            }}
+          >
+            {site.disciplines.map((discipline) => (
+              <li
+                key={discipline}
+                style={{
+                  padding: "0.45rem 1rem",
+                  border: "1px solid rgba(255, 92, 57, 0.35)",
+                  background: "rgba(255, 92, 57, 0.08)",
+                  borderRadius: "999px",
+                  fontSize: "clamp(0.8rem, 1.4vw, 0.9rem)",
+                  color: "rgba(255, 255, 255, 0.85)",
+                  fontWeight: 600,
+                }}
+              >
+                {discipline}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Technology ecosystem */}
+        <div style={{ marginTop: "clamp(4rem, 9vw, 7rem)" }}>
+          <div className="section-header" style={{ marginBottom: "3rem" }}>
+            <AccentRule />
+            <h2>
+              <span style={{ color: "#FFFFFF" }}>Our Technology </span>
+              <span style={gradientText}>Ecosystem</span>
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {site.platforms.map((platform) => (
+              <article
+                key={platform.id}
+                // Anchor target for the Product node in app/json-ld.tsx.
+                id={platform.id}
+                style={{
+                  scrollMarginTop: "110px",
+                  padding: "clamp(1.5rem, 3vw, 2.25rem)",
+                  background: "rgba(255, 255, 255, 0.02)",
+                  border: "1px solid rgba(255, 255, 255, 0.09)",
+                  borderRadius: "16px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: "clamp(1.35rem, 2.6vw, 1.75rem)",
+                    fontWeight: 800,
+                    color: "#FFFFFF",
+                    letterSpacing: "-0.01em",
+                    margin: "0 0 0.5rem 0",
+                  }}
+                >
+                  {platform.display}
+                  {attribution(platform) && (
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.85rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.01em",
+                        color: "rgba(255, 255, 255, 0.5)",
+                        marginTop: "0.35rem",
+                      }}
+                    >
+                      {attribution(platform)}
+                    </span>
+                  )}
+                </h3>
+
+                <p
+                  style={{
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#FF5C39",
+                    margin: "0 0 1.5rem 0",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {platform.type}
+                </p>
+
+                {platform.body.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 40)}
+                    style={{
+                      fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                      lineHeight: 1.7,
+                      color: "rgba(255, 255, 255, 0.7)",
+                      margin: "0 0 1rem 0",
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+
+                {platform.note && (
+                  <p
+                    style={{
+                      marginTop: "auto",
+                      paddingTop: "1rem",
+                      borderTop: "1px solid rgba(255, 92, 57, 0.2)",
+                      fontSize: "0.8rem",
+                      lineHeight: 1.6,
+                      color: "rgba(255, 92, 57, 0.9)",
+                      fontWeight: 600,
+                      marginBottom: 0,
+                    }}
+                  >
+                    {platform.note}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {/* Closing statement */}
+        <div
+          style={{
+            marginTop: "clamp(4rem, 9vw, 7rem)",
+            maxWidth: "900px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            textAlign: "center",
+          }}
+        >
+          <div className="section-header" style={{ marginBottom: "2.5rem" }}>
+            <AccentRule />
+            <h2>{site.closing.heading}</h2>
+          </div>
+
+          <p style={{ ...bodyCopy, marginBottom: "1rem" }}>
+            {site.closing.lead}
+          </p>
+
+          <p
+            style={{
+              ...gradientText,
+              fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+              fontWeight: 900,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.2,
+              margin: "0 0 2.5rem 0",
+            }}
+          >
+            {site.closing.principle}
+          </p>
+
+          {site.closing.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)} style={bodyCopy}>
+              {paragraph}
+            </p>
+          ))}
+
+          <ul
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "0.6rem",
+              listStyle: "none",
+              padding: 0,
+              margin: "1.5rem 0 2.5rem 0",
+            }}
+          >
+            {site.closing.foundation.map((pillar) => (
+              <li
+                key={pillar}
+                style={{
+                  padding: "0.45rem 1rem",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  background: "rgba(255, 255, 255, 0.03)",
+                  borderRadius: "999px",
+                  fontSize: "clamp(0.8rem, 1.4vw, 0.9rem)",
+                  color: "#FFFFFF",
+                  fontWeight: 700,
+                }}
+              >
+                {pillar}
+              </li>
+            ))}
+          </ul>
+
+          <p
+            style={{
+              fontSize: "clamp(1.05rem, 2vw, 1.35rem)",
+              lineHeight: 1.6,
+              color: "rgba(255, 255, 255, 0.88)",
+              fontWeight: 600,
+              margin: 0,
+            }}
+          >
+            {site.closing.statement}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+});
+
 // Optimized Hero Section Component
 const HeroSection = React.memo(
   ({ onLoginClick, onShowPromo }) => {
@@ -825,13 +1156,6 @@ const HeroSection = React.memo(
             padding: "0 2rem",
           }}
         >
-          {/* The visible wordmark is an image, so the page carries its textual H1
-              here. .sr-only is the same utility the shadcn components already use:
-              it clips the element out of view while leaving it in the DOM and in the
-              accessibility tree. No display:none, visibility:hidden or opacity:0,
-              and the text matches the visible brand, so it is not cloaking. */}
-          <h1 className="sr-only">TerraLabs Industries</h1>
-
           <div className="hero-badge-container animate-fast">
             <div
               style={{
@@ -1115,7 +1439,7 @@ const EnginesSection = React.memo(({ onLoginClick }) => {
                 backgroundClip: "text",
               }}
             >
-              Terralabs Industries
+              TerraLabs Industries
             </span>
             <span
               style={{
@@ -3710,6 +4034,7 @@ export default function App() {
 
       {/* Main Content */}
       <main className="main-content">
+        <CompanySection />
         <HeroSection
           onLoginClick={() => scrollToSection("pricing")}
           onShowPromo={() => {
@@ -3873,20 +4198,10 @@ export default function App() {
               </div>
 
               <div className="footer-company-description">
-                <p>
-                  Terralabs Industries is a global R&D based
-                  innovation house shaping the next era of
-                  intelligence(Synthetic Intelligence). At the
-                  intersection of AI, Fintech, Robotics and
-                  Quantum Computing, we design adaptive systems
-                  that transcend boundaries — from trading
-                  floors to autonomous machines, from Earth's
-                  infrastructure to interstellar exploration.
-                </p>
+                <p>{site.descriptionShort}</p>
                 <p className="footer-tagline">
                   <strong>
-                    Terralabs — Intelligence for Earth and
-                    Beyond.
+                    {site.name} — {site.tagline}
                   </strong>
                 </p>
               </div>

@@ -76,7 +76,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2024 Terralabs Industries.</p>
+          <p>&copy; 2024 TerraLabs Industries.</p>
           <p className="footer-disclaimer">
             <strong>Compliance Disclaimer:</strong> We are a software provider. We never manage or hold client funds. 
             All money remains in your broker account (MetaTrader 5), accessible and withdrawable by you at any time.
