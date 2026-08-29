@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
   applicationName: site.name,
   generator: "Next.js",
-  category: "finance",
+  category: "technology",
 
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,

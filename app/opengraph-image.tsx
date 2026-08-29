@@ -39,17 +39,17 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 82,
+              fontSize: 76,
               lineHeight: 1.05,
               color: "#FFFFFF",
               fontWeight: 700,
               letterSpacing: -2,
             }}
           >
-            AI-Driven XAU/USD Trading
-          </div>
-          <div style={{ display: "flex", fontSize: 32, color: "#9A9A9A", lineHeight: 1.3 }}>
             {site.tagline}
+          </div>
+          <div style={{ display: "flex", fontSize: 30, color: "#9A9A9A", lineHeight: 1.3 }}>
+            {site.descriptionShort}
           </div>
         </div>
 
