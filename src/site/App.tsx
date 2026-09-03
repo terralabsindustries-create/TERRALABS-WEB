@@ -40,6 +40,7 @@ import {
   Handshake,
   Award,
   Map,
+  Building2,
 } from "lucide-react";
 const terralabsLogo = "/images/TERRA_OPS_LOGO__2_-1.png";
 const aureliusLogo = "/images/figma-placeholder.svg";
@@ -99,6 +100,7 @@ function useOptimizedScroll() {
         "partners",
         "board",
         "contact",
+        "who-we-are",
         "roadmap",
         "legal",
       ];
@@ -367,6 +369,7 @@ const Navigation = React.memo(
         { id: "pricing", label: "Pricing" },
         { id: "partners", label: "Partners" },
         { id: "board", label: "Board" },
+        { id: "who-we-are", label: "Who We Are" },
         { id: "roadmap", label: "RoadMap" },
         { id: "contact", label: "Contact" },
         { id: "legal", label: "Legal" },
@@ -827,16 +830,18 @@ const bodyCopy = {
   margin: "0 0 1.25rem 0",
 } as const;
 
-// Company Section — the page's corporate positioning, and the only H1 on the
-// document. Every string is read from src/lib/site.ts, which app/json-ld.tsx
-// also reads, so the structured data cannot describe the company differently
-// from what a visitor actually sees here.
+// Company Section — the "Who We Are" block: TerraLabs' corporate positioning,
+// the technology ecosystem and the closing statement. Rendered between Contact
+// and RoadMap, and reached by the "Who We Are" nav item via #who-we-are.
+// This holds the only H1 on the document. Every string is read from
+// src/lib/site.ts, which app/json-ld.tsx also reads, so the structured data
+// cannot describe the company differently from what a visitor actually sees.
 const CompanySection = React.memo(() => {
   return (
     <section
-      id="company"
+      id="who-we-are"
       className="company-section"
-      style={{ padding: "9rem 0 5rem", position: "relative" }}
+      style={{ padding: "7rem 0 5rem", position: "relative" }}
     >
       <div className="section-container">
         {/* Positioning */}
@@ -848,6 +853,19 @@ const CompanySection = React.memo(() => {
           }}
         >
           <AccentRule />
+
+          <p
+            style={{
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "rgba(255, 255, 255, 0.45)",
+              margin: "0 0 1.25rem 0",
+            }}
+          >
+            Who We Are
+          </p>
 
           <h1
             style={{
@@ -3759,6 +3777,11 @@ const FloatingMobileNav = React.memo(
         { id: "pricing", icon: Target, label: "Pricing" },
         { id: "partners", icon: Handshake, label: "Partners" },
         { id: "board", icon: Award, label: "Board" },
+        {
+          id: "who-we-are",
+          icon: Building2,
+          label: "Who We Are",
+        },
         { id: "roadmap", icon: Map, label: "RoadMap" },
         {
           id: "contact",
@@ -4034,7 +4057,6 @@ export default function App() {
 
       {/* Main Content */}
       <main className="main-content">
-        <CompanySection />
         <HeroSection
           onLoginClick={() => scrollToSection("pricing")}
           onShowPromo={() => {
@@ -4060,6 +4082,7 @@ export default function App() {
           <BoardOfDirectors />
         </section>
         <ContactSection />
+        <CompanySection />
         <section
           id="roadmap"
           style={{ padding: "0", background: "transparent" }}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, Home, Cpu, Star, TrendingUp, FileText, DollarSign, Users, UserCheck, Mail, Map, Scale } from 'lucide-react';
+import { Menu, X, Home, Cpu, Star, TrendingUp, FileText, DollarSign, Users, UserCheck, Mail, Map, Scale, Building2 } from 'lucide-react';
 
 // Navigation Bar Component - Fixed Fragment Issue
 interface NavItem {
@@ -31,6 +31,7 @@ export function NavigationBar({ terralabsLogo, activeSection, onNavigate, isMobi
     { id: 'partners', label: 'Partners', icon: <Users size={16} /> },
     { id: 'board', label: 'Board', icon: <UserCheck size={16} /> },
     { id: 'contact', label: 'Contact', icon: <Mail size={16} /> },
+    { id: 'who-we-are', label: 'Who We Are', icon: <Building2 size={16} /> },
     { id: 'roadmap', label: 'RoadMap', icon: <Map size={16} /> },
     { id: 'legal', label: 'Legal', icon: <Scale size={16} /> },
   ];
