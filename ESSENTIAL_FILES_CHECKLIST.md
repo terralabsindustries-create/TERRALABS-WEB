@@ -32,7 +32,7 @@
 
 ### Main Content Components
 ```
-✅ /src/app/components/BoardOfDirectors.tsx      # Board members (Jyothish CEO/CTO, Renjith Strategic Backer)
+✅ /src/site/components/BoardOfDirectors.tsx     # Board members (Jyothish CEO, Akbar CTO, Renjith Strategic Backer) — data in src/lib/site.ts
 ✅ /src/app/components/PricingSectionClean.tsx   # 12% APR capital-based pricing
 ✅ /src/app/components/RoadMap.tsx               # Company roadmap
 ✅ /src/app/components/TradingDashboard.tsx      # Trading interface
@@ -208,10 +208,14 @@ Weights: 300, 400, 500, 600, 700
 ### Board of Directors
 
 **Jyothish Vanaja Rajendran**
-- Title: CEO & Chief Technology Officer
+- Title: Chief Executive Officer (CEO)
 - Email: jyothishvr@outlook.com
 - Phone: +971 5 4343 4848
-- Role: Complete technology stack & strategic direction
+- Role: Strategic direction & vision
+
+**Akbar Haleel**
+- Title: Chief Technology Officer (CTO)
+- Role: Engineering, system architecture & technology stack
 
 **Renjith Raj**
 - Title: Strategic Backer & Co-Founder
@@ -300,9 +304,11 @@ Weights: 300, 400, 500, 600, 700
 
 ## 📞 SUPPORT CONTACTS
 
-**CEO & CTO:** Jyothish Vanaja Rajendran  
+**CEO:** Jyothish Vanaja Rajendran  
 📧 jyothishvr@outlook.com  
 📱 +971 5 4343 4848
+
+**CTO:** Akbar Haleel
 
 **Strategic Backer:** Renjith Raj  
 📧 renjithrajrv@outlook.com  

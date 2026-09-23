@@ -150,6 +150,83 @@ export const site = {
     },
   ],
 
+  // The people who run TerraLabs Industries. Rendered by the Board of Directors
+  // section and emitted as schema.org Person nodes, so the names and titles a
+  // crawler reads are exactly the ones a visitor sees. `jobTitle` is the full
+  // title search engines resolve role queries ("TerraLabs Industries CTO")
+  // against; `role` is the abbreviation, stated alongside it in the visible
+  // copy so both forms match. `sameAs` takes each person's public profile URLs
+  // (LinkedIn first) — the strongest signal tying the person to the company.
+  leadership: [
+    {
+      id: "jyothish-vanaja-rajendran",
+      name: "Jyothish Vanaja Rajendran",
+      title: "Chief Executive Officer",
+      jobTitle: "Chief Executive Officer",
+      role: "CEO",
+      founder: false,
+      description:
+        "Visionary technologist and serial entrepreneur pioneering AI-driven trading engines with mastery over execution science, system architecture, and enterprise infrastructure. Grounded in advanced computational systems and data science from early exposure to technology ecosystems, bridging business strategy with cutting-edge technical innovation. Since early 2000s, architecting multi-industry ventures across fintech, AI, blockchain (WEB 3.0), logistics, F&B, construction, and sustainable living infrastructure spanning India, UAE, Australia, and Southeast Asia. Steering TerraLabs Industries' strategic direction as Chief Executive Officer—guiding the vision behind Pythagoras Stardust™ in production while driving frontier research through Large Reasoning Models, neural algorithmic trading frameworks, and next-generation execution systems. Co-founder of Metawire (Blockchain Technology & Payment Gateways) and GastroLabs www.gastrolabs.xyz, with a civilization-scale vision focused on capital efficiency, AI-powered market intelligence, and sustainable, longevity-oriented living systems.",
+      expertise: [
+        "AI & Machine Learning",
+        "Trading Algorithms",
+        "Strategic Leadership",
+        "Financial Technology",
+        "Multi-Industry Innovation",
+      ],
+      highlights: "CEO • AI Pioneer • Serial Entrepreneur",
+      tagline: "The man setting strategy and vision, from direction to execution",
+      email: "jyothishvr@outlook.com",
+      phone: "+971543434848",
+      phoneDisplay: "+971 5 4343 4848",
+      sameAs: [],
+    },
+    {
+      id: "akbar-haleel",
+      name: "Akbar Haleel",
+      title: "Chief Technology Officer",
+      jobTitle: "Chief Technology Officer",
+      role: "CTO",
+      founder: false,
+      description:
+        "Chief Technology Officer of TerraLabs Industries, leading engineering across the company's technology ecosystem—the software, infrastructure and intelligent systems behind Pythagoras Stardust™, Titanus-X™, BlueBox One, WeLoop™ and the TerraLabs R&D Laboratory. Responsible for system architecture, platform engineering and taking TerraLabs research from the laboratory into governed, real-world deployment.",
+      expertise: [
+        "System Architecture",
+        "Platform Engineering",
+        "AI Systems",
+        "Technology Strategy",
+      ],
+      highlights: "CTO • Systems Architect • Platform Engineering",
+      tagline: "The man engineering TerraLabs' technology, from architecture to production",
+      email: null,
+      phone: null,
+      phoneDisplay: null,
+      sameAs: [],
+    },
+    {
+      id: "renjith-raj",
+      name: "Renjith Raj",
+      title: "Entrepreneur, Strategic Backer & Co-Founder",
+      jobTitle: "Co-Founder",
+      role: null,
+      founder: true,
+      description:
+        "Strategic capital partner and institutional network architect driving TerraLabs Industries' market positioning and credibility. Multi-disciplinary Entrepreneur operating Industrial printing warehouses, Chain of Fitness units, Printing Material Supply chain. Orchestrating high-value relationships with institutional investors, regulatory bodies, and strategic partners across UAE and international markets. Expert in capital structuring, public positioning, and building institutional trust at scale.",
+      expertise: [
+        "Capital Strategy",
+        "Institutional Networks",
+        "Public Relations",
+        "Strategic Partnerships",
+      ],
+      highlights: null,
+      tagline: "The man behind capital, credibility and Public Positioning",
+      email: "renjithrajrv@outlook.com",
+      phone: "+971547474781",
+      phoneDisplay: "+971 5 474747 81",
+      sameAs: [],
+    },
+  ],
+
   // Deliberately entity-first, not head-term-first. TerraLabs does not compete
   // for generic phrases like "best AI company" or "innovation company"; the
   // strategy is to make the graph unambiguous — TerraLabs Industries as the
@@ -205,6 +282,25 @@ export const site = {
 
 export type Site = typeof site;
 export type Platform = (typeof site.platforms)[number];
+export type Leader = (typeof site.leadership)[number];
+
+/**
+ * "TerraLabs Industries is led by <name>, Chief Executive Officer (CEO), and
+ * <name>, Chief Technology Officer (CTO)." — one plain sentence naming each
+ * executive with both forms of their title. Rendered as visible text in the
+ * Board section so a search engine answering "who is the CTO of TerraLabs
+ * Industries" has an unambiguous sentence to extract.
+ */
+export const leadershipStatement = () => {
+  const executives = site.leadership
+    .filter((leader) => leader.role)
+    .map((leader) => `${leader.name}, ${leader.jobTitle} (${leader.role})`);
+  const list =
+    executives.length > 1
+      ? `${executives.slice(0, -1).join(", ")}, and ${executives[executives.length - 1]}`
+      : executives[0];
+  return `${site.name} is led by ${list}.`;
+};
 
 /**
  * "<platform> by TerraLabs Industries" — the phrasing that ties each child

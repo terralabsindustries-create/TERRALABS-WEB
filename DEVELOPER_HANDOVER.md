@@ -161,14 +161,19 @@ The website is a **single-page application** with smooth scroll navigation:
 **Technology:** SNAIT (Synthetic Neural Adaptive Intelligence Technology)
 
 ### 3. **Board of Directors** (`#board`)
-**File:** `/src/app/components/BoardOfDirectors.tsx`  
+**File:** `/src/site/components/BoardOfDirectors.tsx`  
+Names, titles and bios are defined in `src/lib/site.ts` (`site.leadership`), which also feeds the schema.org Person nodes in `app/json-ld.tsx`. Edit them there.  
 **Current Members:**
 
 #### Jyothish Vanaja Rajendran
-- **Title:** Chief Executive Officer & Chief Technology Officer
+- **Title:** Chief Executive Officer (CEO)
 - **Email:** jyothishvr@outlook.com
 - **Phone:** +971 5 4343 4848
-- **Role:** Oversees complete technology stack, AI trading engines, and strategic direction
+- **Role:** Strategic direction and vision
+
+#### Akbar Haleel
+- **Title:** Chief Technology Officer (CTO)
+- **Role:** Engineering, system architecture and the technology stack
 
 #### Renjith Raj
 - **Title:** Entrepreneur, Strategic Backer & Co-Founder
@@ -487,9 +492,11 @@ html {
 
 ### Board of Directors
 
-**Jyothish Vanaja Rajendran** (CEO & CTO)  
+**Jyothish Vanaja Rajendran** (CEO)  
 📧 jyothishvr@outlook.com  
 📱 +971 5 4343 4848
+
+**Akbar Haleel** (CTO)
 
 **Renjith Raj** (Strategic Backer & Co-Founder)  
 📧 renjithrajrv@outlook.com  
@@ -533,7 +540,8 @@ TERRALABS Website
 │   └── Strategic Partnerships
 │
 ├── Board of Directors (#board)
-│   ├── Jyothish Vanaja Rajendran (CEO & CTO)
+│   ├── Jyothish Vanaja Rajendran (CEO)
+│   ├── Akbar Haleel (CTO)
 │   └── Renjith Raj (Strategic Backer)
 │
 ├── Contact (#contact)
@@ -565,7 +573,7 @@ Dedicated Pages:
 3. ✅ Fixed RTL direction issues (English-only LTR)
 4. ✅ Eliminated all React.Fragment errors
 5. ✅ Removed Narayanan Mohanan from Board of Directors
-6. ✅ Promoted Jyothish to CEO & CTO with combined roles
+6. ✅ Promoted Jyothish to CEO & CTO with combined roles (superseded: Akbar Haleel is now CTO, Jyothish is CEO)
 7. ✅ Updated Board with comprehensive technical content
 8. ✅ Fixed CSS import ordering issues (`@import` before other rules)
 

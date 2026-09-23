@@ -131,16 +131,22 @@
 │                                                                      │
 │  ┌────────────────────────────────────────────────┐                 │
 │  │ 👨‍💼 JYOTHISH VANAJA RAJENDRAN                  │                 │
-│  │ Title: CEO & Chief Technology Officer          │                 │
+│  │ Title: Chief Executive Officer (CEO)           │                 │
 │  │ Email: jyothishvr@outlook.com                  │                 │
 │  │ Phone: +971 5 4343 4848                        │                 │
 │  │                                                │                 │
 │  │ Responsibilities:                              │                 │
-│  │ • Complete technology stack oversight          │                 │
-│  │ • AI trading engines (Aurelius-1™, Titanus-X™) │                 │
 │  │ • Strategic direction & vision                 │                 │
-│  │ • System architecture & execution              │                 │
 │  │ • Multi-industry ventures leadership           │                 │
+│  └────────────────────────────────────────────────┘                 │
+│                                                                      │
+│  ┌────────────────────────────────────────────────┐                 │
+│  │ 👨‍💼 AKBAR HALEEL                               │                 │
+│  │ Title: Chief Technology Officer (CTO)          │                 │
+│  │                                                │                 │
+│  │ Responsibilities:                              │                 │
+│  │ • Engineering & system architecture            │                 │
+│  │ • Technology stack & platform infrastructure   │                 │
 │  └────────────────────────────────────────────────┘                 │
 │                                                                      │
 │  ┌────────────────────────────────────────────────┐                 │
@@ -458,7 +464,7 @@ LEGAL SECTION
 BOARD SECTION
 │
 ├─→ Jyothish Email Link ────────→ mailto:jyothishvr@outlook.com
-├─→ Jyothish Phone Link ────────→ tel:+97154343484
+├─→ Jyothish Phone Link ────────→ tel:+971543434848
 ├─→ Renjith Email Link ─────────→ mailto:renjithrajrv@outlook.com
 └─→ Renjith Phone Link ─────────→ tel:+971547474781
 

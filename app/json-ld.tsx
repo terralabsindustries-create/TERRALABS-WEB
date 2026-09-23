@@ -50,6 +50,25 @@ const platforms = site.platforms.map((platform) => ({
   manufacturer: { "@id": organizationId },
 }));
 
+/**
+ * One Person node per member of the leadership shown in the Board of Directors
+ * section, carrying the same name and title a visitor reads there. This is the
+ * site's own statement of who holds which role, for search engines to weigh
+ * against older third-party listings. `url` points at the person's card.
+ */
+const personId = (id: string) => `${site.url}/#${id}`;
+
+const people = site.leadership.map((leader) => ({
+  "@type": "Person",
+  "@id": personId(leader.id),
+  name: leader.name,
+  jobTitle: leader.jobTitle,
+  description: leader.description,
+  url: `${site.canonical}/#${leader.id}`,
+  worksFor: { "@id": organizationId },
+  ...(leader.sameAs.length ? { sameAs: [...leader.sameAs] } : {}),
+}));
+
 const organization = {
   "@type": "Organization",
   "@id": organizationId,
@@ -64,6 +83,12 @@ const organization = {
   slogan: site.tagline,
   knowsAbout: [...site.disciplines],
   owns: site.platforms.map((platform) => ({ "@id": platformId(platform.id) })),
+  founder: site.leadership
+    .filter((leader) => leader.founder)
+    .map((leader) => ({ "@id": personId(leader.id) })),
+  employee: site.leadership
+    .filter((leader) => !leader.founder)
+    .map((leader) => ({ "@id": personId(leader.id) })),
   address: {
     "@type": "PostalAddress",
     addressLocality: site.location.locality,
@@ -97,7 +122,7 @@ const website = {
 
 const graph = {
   "@context": "https://schema.org",
-  "@graph": [organization, website, ...platforms],
+  "@graph": [organization, website, ...platforms, ...people],
 };
 
 export function JsonLd() {

@@ -202,12 +202,18 @@ Font: Space Grotesk (300, 400, 500, 600, 700)
 
 ## 👥 Board of Directors
 
-### Current Members (2)
+### Current Members (3)
+
+Names, titles and bios are defined in `src/lib/site.ts` (`site.leadership`), which also feeds the schema.org Person nodes in `app/json-ld.tsx`. Edit them there.
 
 **Jyothish Vanaja Rajendran**  
-*Chief Executive Officer & Chief Technology Officer*  
+*Chief Executive Officer (CEO)*  
 📧 jyothishvr@outlook.com | 📱 +971 5 4343 4848  
-Oversees complete technology stack, AI trading engines, and strategic direction
+Strategic direction and vision
+
+**Akbar Haleel**  
+*Chief Technology Officer (CTO)*  
+Engineering, system architecture and the technology stack
 
 **Renjith Raj**  
 *Entrepreneur, Strategic Backer & Co-Founder*  
@@ -321,9 +327,11 @@ pnpm add <package-name>
 ## 📞 Support & Contact
 
 ### Development Support
-**CEO & CTO:** Jyothish Vanaja Rajendran  
+**CEO:** Jyothish Vanaja Rajendran  
 📧 jyothishvr@outlook.com  
 📱 +971 5 4343 4848
+
+**CTO:** Akbar Haleel
 
 **Strategic Backer:** Renjith Raj  
 📧 renjithrajrv@outlook.com  
@@ -344,7 +352,7 @@ pnpm add <package-name>
 ✅ Fixed RTL direction issues (English-only LTR)  
 ✅ Eliminated all React.Fragment errors  
 ✅ Removed Narayanan Mohanan from Board  
-✅ Promoted Jyothish to CEO & CTO (dual role)  
+✅ Promoted Jyothish to CEO & CTO (dual role) — superseded: Akbar Haleel is now CTO, Jyothish is CEO  
 ✅ Enhanced Board profiles with technical content  
 ✅ Fixed CSS import ordering issues  
 

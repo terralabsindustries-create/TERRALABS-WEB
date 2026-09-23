@@ -1,3 +1,5 @@
+import { leadershipStatement, site } from "../../lib/site";
+
 export default function AboutPage() {
   return (
     <div className="page-container">
@@ -13,7 +15,7 @@ export default function AboutPage() {
             <span className="title-line">Not Hype.</span>
           </h1>
           
-          <p className="page-subtitle">Founded by Joe, Ranjith, and Narayanan to bring disciplined, quant-grade trading to everyday accounts.</p>
+          <p className="page-subtitle">{leadershipStatement()}</p>
         </div>
       </section>
 
@@ -39,59 +41,23 @@ export default function AboutPage() {
         <div className="section-content">
           <h2 className="section-title">Meet The Team</h2>
           <div className="founders-grid">
-            <div className="founder-card">
-              <div className="founder-avatar">
-                <div className="avatar-placeholder">J</div>
-              </div>
-              <div className="founder-info">
-                <h3>Joe</h3>
-                <div className="founder-title">Co-Founder & CEO</div>
-                <p className="founder-bio">
-                  Former quantitative analyst with 12+ years experience in algorithmic trading systems and risk management at tier-1 investment banks.
-                </p>
-                <div className="founder-expertise">
-                  <span className="expertise-tag">Quantitative Analysis</span>
-                  <span className="expertise-tag">Risk Management</span>
-                  <span className="expertise-tag">Strategy Development</span>
+            {site.leadership.map((leader) => (
+              <div className="founder-card" key={leader.id}>
+                <div className="founder-avatar">
+                  <div className="avatar-placeholder">{leader.name.charAt(0)}</div>
+                </div>
+                <div className="founder-info">
+                  <h3>{leader.name}</h3>
+                  <div className="founder-title">{leader.title}</div>
+                  <p className="founder-bio">{leader.description}</p>
+                  <div className="founder-expertise">
+                    {leader.expertise.map((item) => (
+                      <span className="expertise-tag" key={item}>{item}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="founder-card">
-              <div className="founder-avatar">
-                <div className="avatar-placeholder">R</div>
-              </div>
-              <div className="founder-info">
-                <h3>Ranjith</h3>
-                <div className="founder-title">Co-Founder & CTO</div>
-                <p className="founder-bio">
-                  Technology leader with expertise in high-frequency trading infrastructure, real-time systems, and financial data processing at scale.
-                </p>
-                <div className="founder-expertise">
-                  <span className="expertise-tag">System Architecture</span>
-                  <span className="expertise-tag">HFT Infrastructure</span>
-                  <span className="expertise-tag">Data Engineering</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="founder-card">
-              <div className="founder-avatar">
-                <div className="avatar-placeholder">N</div>
-              </div>
-              <div className="founder-info">
-                <h3>Narayanan</h3>
-                <div className="founder-title">Co-Founder & COO</div>
-                <p className="founder-bio">
-                  Operations and compliance expert with deep experience in regulatory frameworks, broker relations, and institutional client management.
-                </p>
-                <div className="founder-expertise">
-                  <span className="expertise-tag">Operations</span>
-                  <span className="expertise-tag">Compliance</span>
-                  <span className="expertise-tag">Broker Relations</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
